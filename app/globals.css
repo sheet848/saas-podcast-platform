@@ -1,26 +1,280 @@
-@import "tailwindcss";
+/*@tailwind base;
+@tailwind components;*/
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ===== Base reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  background: #101114; /* instead of hardcoded #101114 */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ===== Custom Utilities ===== */
+@layer utilities {
+  /* ====== Input Class ====== */
+.input-class {
+  font-size: 16px;
+  line-height: normal;
+  background-color: #15171C; /* black-1 */
+  border-radius: 6px;
+  border: none;
+  color: #71788B; /* gray-1 */
+}
+
+.input-class::placeholder {
+  font-size: 16px;
+  line-height: normal;
+  color: #71788B; /* gray-1 */
+}
+
+/* ====== Podcast Grid ====== */
+.podcast_grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.25rem; /* 20px */
+}
+
+@media (min-width: 640px) {
+  .podcast_grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .podcast_grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1536px) {
+  .podcast_grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ====== Right Sidebar ====== */
+.right_sidebar {
+  position: sticky;
+  top: 0;
+  right: 0;
+  display: flex;
+  width: 310px;
+  flex-direction: column;
+  overflow-y: hidden;
+  border: none;
+  background-color: #15171C; /* black-1 */
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 2rem; /* 32px */
+}
+
+@media (max-width: 1280px) {
+  .right_sidebar {
+    display: none;
+  }
+}
+
+/* ====== Left Sidebar ====== */
+.left_sidebar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: fit-content;
+  flex-direction: column;
+  justify-content: space-between;
+  border: none;
+  background-color: #15171C; /* black-1 */
+  padding-top: 2rem; /* 32px */
+  color: #FFFFFF; /* white-1 */
+}
+
+@media (max-width: 768px) {
+  .left_sidebar {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  .left_sidebar {
+    width: 270px;
+    padding-left: 2rem; /* 32px */
+  }
+}
+
+/* ====== Generate Thumbnail ====== */
+.generate_thumbnail {
+  margin-top: 30px;
+  display: flex;
+  width: 100%;
+  max-width: 520px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem; /* 8px */
+  border-radius: 0.5rem; /* 8px */
+  border: 1px solid #24272C; /* black-6 */
+  background-color: #15171C; /* black-1 */
+  padding: 0.625rem 0.625rem; /* 10px */
+}
+
+@media (min-width: 768px) {
+  .generate_thumbnail {
+    flex-direction: row;
+    gap: 0;
+  }
+}
+
+/* ====== Image Div ====== */
+.image_div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.25rem; /* 20px */
+  height: 142px;
+  width: 100%;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 0.75rem; /* 12px */
+  border-radius: 0.75rem; /* 12px */
+  border: 3.2px dashed #24272C; /* black-6 */
+  background-color: #15171C; /* black-1 */
+}
+
+/* ====== Carousel Box ====== */
+.carousel_box {
+  position: relative;
+  display: flex;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  flex: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: none;
+  border-radius: 0.75rem; /* 12px */
+}
+
+/* ====== Button Bold 16 ====== */
+.button_bold-16 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFFFFF; /* white-1 */
+  transition: all 0.5s;
+}
+
+/* ====== Flex Center ====== */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ====== Text Sizes ====== */
+.text-12 {
+  font-size: 12px;
+  line-height: normal;
+}
+.text-14 {
+  font-size: 14px;
+  line-height: normal;
+}
+.text-16 {
+  font-size: 16px;
+  line-height: normal;
+}
+.text-18 {
+  font-size: 18px;
+  line-height: normal;
+}
+.text-20 {
+  font-size: 20px;
+  line-height: normal;
+}
+.text-24 {
+  font-size: 24px;
+  line-height: normal;
+}
+.text-32 {
+  font-size: 32px;
+  line-height: normal;
+}
+
+}
+
+/* ===== Custom Scrollbar ===== */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #15171c; /* instead of #15171c */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #222429; /* instead of #222429 */
+  border-radius: 50px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ===== Glassmorphism ===== */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.glassmorphism-auth {
+  background: rgba(6, 3, 3, 0.711);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.glassmorphism-black {
+  background: rgba(18, 18, 18, 0.64);
+  backdrop-filter: blur(37px);
+  -webkit-backdrop-filter: blur(37px);
+}
+
+/* ===== Clerk Overrides ===== */
+.cl-socialButtonsIconButton {
+  border: 2px solid #222429;
+}
+.cl-button {
+  color: white;
+}
+.cl-socialButtonsProviderIcon__github {
+  filter: invert(1);
+}
+.cl-internal-b3fm6y,
+.cl-formButtonPrimary,
+.cl-footerActionLink,
+.cl-internal-wkkub3 {
+  background: #F97535;
+  color: #F97535;
+}
+.cl-headerSubtitle {
+  color: #c5d0e6;
+}
+.cl-logoImage {
+  width: 10rem;
+  height: 3rem;
+}
+.cl-internal-4a7e9l,
+.cl-userButtonPopoverActionButtonIcon {
+  color: white;
 }

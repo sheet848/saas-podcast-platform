@@ -1,7 +1,7 @@
-//import plugin from "tailwindcss/plugin"
+import type { Config } from "tailwindcss";
 import "tailwindcss-animate"
 
-const config = {
+const Config = {
   darkMode: "class", // still supported
   theme: {
     container: {
@@ -12,7 +12,7 @@ const config = {
       },
     },
     extend: {
-      colors: {
+      /*colors: {
         white: {
           1: "#FFFFFF",
           2: "rgba(255, 255, 255, 0.72)",
@@ -34,7 +34,7 @@ const config = {
         gray: {
           1: "#71788B",
         },
-      },
+      },*/
       backgroundImage: {
         "nav-focus":
           "linear-gradient(270deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.00) 100%)",
@@ -60,4 +60,4 @@ const config = {
   ],
 }
 
-export default config
+export default Config

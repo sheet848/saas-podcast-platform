@@ -1,20 +1,28 @@
+// middleware.ts
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
-const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)', '/'])
+const isPublicRoute = createRouteMatcher([
+  '/sign-in(.*)',
+  '/sign-up(.*)',
+  '/', // homepage is public
+  '/create-podcast',
+  '/discover',
+]);
 
 export default clerkMiddleware((auth, req) => {
-  // auth could be undefined if no Clerk session is found
-  //const userId = auth?.userId;
-  if (!isPublicRoute(req) && (!auth || !auth.userId)) {
-     // redirect to sign-in if not authenticated
+  if (!isPublicRoute(req) && !auth?.userId) {
+    // user not signed in → go to sign-in
     return NextResponse.redirect(new URL('/sign-in', req.url));
   }
 
-  // If authenticated or public route, just continue
+  // signed in or public route → continue
   return NextResponse.next();
 });
 
 export const config = {
-  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+  matcher: [
+    '/((?!_next|.*\\..*).*)', // all routes except static assets
+    '/(api|trpc)(.*)',        // api routes
+  ],
 };
